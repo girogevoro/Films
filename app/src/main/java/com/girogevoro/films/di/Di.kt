@@ -3,10 +3,12 @@ package com.girogevoro.films.di
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.girogevoro.films.BuildConfig
+import com.girogevoro.films.data.FilmRepositoryImpl
 import com.girogevoro.films.data.remote_data_source.RemoteDataSource
 import com.girogevoro.films.data.remote_data_source.RemoteDataSourceImpl
 import com.girogevoro.films.data.retrofit.FilmApi
 import com.girogevoro.films.data.retrofit.InterceptorApi
+import com.girogevoro.films.domian.repository.FilmRepository
 import com.girogevoro.films.ui.films.FilmsViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -68,6 +70,10 @@ object Di {
     val repositoryModule = module {
         single<RemoteDataSource> {
             RemoteDataSourceImpl(filmApi = get())
+        }
+
+        single<FilmRepository> {
+            FilmRepositoryImpl(dataSource = get())
         }
     }
 }

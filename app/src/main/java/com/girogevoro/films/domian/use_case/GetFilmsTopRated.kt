@@ -6,5 +6,5 @@ import com.girogevoro.films.domian.repository.FilmRepository
 
 class GetFilmsTopRated(private val filmRepository: FilmRepository) {
     suspend fun get(adult: Boolean, page: Int): AppState<FilmsEntity> =
-        filmRepository.getFilmsTopRated(adult, page)
+        filmRepository.getFilmsTop(adult, page)
 }
