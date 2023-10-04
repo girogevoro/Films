@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
 @Suppress("UNCHECKED_CAST")
-abstract class ViewBindingFragment<VB : ViewBinding>() : Fragment() {
+abstract class ViewBindingFragment<VB : ViewBinding>() : BackPressedFragment() {
 
     private var _binding: VB? = null
     protected val binding: VB get() = _binding!!
