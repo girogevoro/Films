@@ -1,7 +1,5 @@
 package com.girogevoro.films.di
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.girogevoro.films.BuildConfig
 import com.girogevoro.films.data.FilmRepositoryImpl
 import com.girogevoro.films.data.remote_data_source.RemoteDataSource
@@ -9,6 +7,8 @@ import com.girogevoro.films.data.remote_data_source.RemoteDataSourceImpl
 import com.girogevoro.films.data.retrofit.FilmApi
 import com.girogevoro.films.data.retrofit.InterceptorApi
 import com.girogevoro.films.domian.repository.FilmRepository
+import com.girogevoro.films.domian.use_case.GetFilmDetailById
+import com.girogevoro.films.domian.use_case.GetFilmsTop
 import com.girogevoro.films.ui.films.FilmsViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -23,13 +23,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.time.Duration
 
 object Di {
-    val viewModelModule = module {
-//        viewModel(){
-//            FilmsViewModel()
-//        }
+    fun viewModelModule() = module {
+        viewModel() {
+            FilmsViewModel(getFilmsTopUseCase = get())
+        }
     }
 
-    val filmApiModule = module {
+    fun filmApiModule() = module {
         single<Interceptor> {
             InterceptorApi()
         }
@@ -67,7 +67,7 @@ object Di {
     }
 
 
-    val repositoryModule = module {
+    fun repositoryModule() = module {
         single<RemoteDataSource> {
             RemoteDataSourceImpl(filmApi = get())
         }
@@ -76,4 +76,15 @@ object Di {
             FilmRepositoryImpl(dataSource = get())
         }
     }
+
+    fun useCasesModule() = module {
+        factory<GetFilmsTop> {
+            GetFilmsTop(filmRepository = get())
+        }
+
+        factory<GetFilmDetailById> {
+            GetFilmDetailById(filmRepository = get())
+        }
+    }
+
 }
