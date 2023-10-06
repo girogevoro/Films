@@ -6,20 +6,6 @@ import com.girogevoro.films.domian.entity.FilmEntity
 import com.girogevoro.films.domian.entity.FilmsEntity
 
 class RemoteDataSourceImpl(private val filmApi: FilmApi) : RemoteDataSource {
-
-    override suspend fun searchFilm(query: String): AppState<FilmsEntity> =
-        try {
-            val result = filmApi.searchFilmsAsync(query).await()
-
-            if (result.movies.isNotEmpty()) {
-                AppState.Success(result)
-            } else {
-                AppState.Error(Exception(NO_DATA))
-            }
-        } catch (err: Exception) {
-            AppState.Error(err)
-        }
-
     override suspend fun getFilmsTop(adult: Boolean, page: Int): AppState<FilmsEntity> =
         try {
             val result = filmApi.getFilmsTopAsync(adult, page).await()

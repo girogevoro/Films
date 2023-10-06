@@ -7,9 +7,6 @@ import com.girogevoro.films.domian.entity.FilmsEntity
 import com.girogevoro.films.domian.repository.FilmRepository
 
 class FilmRepositoryImpl(private val dataSource: RemoteDataSource) : FilmRepository {
-    override suspend fun searchFilm(query: String): AppState<FilmsEntity> {
-        return dataSource.searchFilm(query)
-    }
 
     override suspend fun getFilmsTop(adult: Boolean, page: Int): AppState<FilmsEntity> {
         return dataSource.getFilmsTop(adult, page)

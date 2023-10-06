@@ -9,10 +9,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface FilmApi {
-
-    @GET("search/movie?api_key=${BuildConfig.KEY}&language=ru-RU")
-    fun searchFilmsAsync(@Query("query") query: String): Deferred<FilmsEntity>
-
     @GET("movie/top_rated?api_key=${BuildConfig.KEY}&language=ru-RU")
     fun getFilmsTopAsync(
         @Query("include_adult") adult: Boolean,
