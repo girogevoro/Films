@@ -5,9 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.girogevoro.films.R
 import com.girogevoro.films.databinding.FragmentFilmsBinding
 import com.girogevoro.films.domian.AppState
 import com.girogevoro.films.domian.entity.FilmsEntity
+import com.girogevoro.films.ui.description.DescriptionFragment
 import com.girogevoro.films.ui.films.adapter.FilmAdapter
 import com.girogevoro.films.utils.ui.ViewBindingFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -15,7 +17,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilmsFragment : ViewBindingFragment<FragmentFilmsBinding>() {
 
-    private val filmsAdapter: FilmAdapter = FilmAdapter { filmsViewModel.onClickFilm(it) }
+    private val filmsAdapter: FilmAdapter = FilmAdapter {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.container, DescriptionFragment.newInstance(it))
+            .addToBackStack(null)
+            .commitAllowingStateLoss()
+    }
     private var isLastPage: Boolean = false
 
     private var isLoading: Boolean = false

@@ -46,14 +46,10 @@ class FilmsViewModel(
             }
         }
 
-    fun onClickFilm(position: Int) {
 
-    }
 
 
     companion object {
-        private const val DEFAULT_ERROR = "Default error"
-        private const val NOT_CONNECT = "No internet connection"
         private const val START_PAGE = 1
     }
 }

@@ -9,6 +9,7 @@ import com.girogevoro.films.data.retrofit.InterceptorApi
 import com.girogevoro.films.domian.repository.FilmRepository
 import com.girogevoro.films.domian.use_case.GetFilmDetailById
 import com.girogevoro.films.domian.use_case.GetFilmsTop
+import com.girogevoro.films.ui.description.DescriptionViewModel
 import com.girogevoro.films.ui.films.FilmsViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -26,6 +27,9 @@ object Di {
     fun viewModelModule() = module {
         viewModel() {
             FilmsViewModel(getFilmsTopUseCase = get())
+        }
+        viewModel {
+            DescriptionViewModel(getFilmDetailById = get())
         }
     }
 
