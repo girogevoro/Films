@@ -24,8 +24,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backdrop_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_size_height"
         android:layout_marginTop="@dimen/margin_large"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"

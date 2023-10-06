@@ -5,4 +5,5 @@
     <dimen name="poster_width">180dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="image_size_height">150dp</dimen>
 </resources>

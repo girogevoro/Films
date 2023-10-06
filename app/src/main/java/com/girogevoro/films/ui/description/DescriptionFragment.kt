@@ -2,20 +2,21 @@ package com.girogevoro.films.ui.description
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+
 import coil.load
 import com.girogevoro.films.BuildConfig
 import com.girogevoro.films.databinding.FragmentDescriptionBinding
 import com.girogevoro.films.domian.AppState
 import com.girogevoro.films.domian.entity.FilmEntity
 import com.girogevoro.films.utils.ui.ViewBindingFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ID_FILM = "ID_FILM"
 
 
 class DescriptionFragment : ViewBindingFragment<FragmentDescriptionBinding>() {
     private var idFilm: Int? = null
-    private val viewModel: DescriptionViewModel by viewModels()
+    private val descriptionViewModel: DescriptionViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -25,12 +26,12 @@ class DescriptionFragment : ViewBindingFragment<FragmentDescriptionBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getFilmDetailLiveData().observe(viewLifecycleOwner){
+        descriptionViewModel.getFilmDetailLiveData().observe(viewLifecycleOwner){
             if (it is AppState.Success){
                 showDescriptionFilm(it.data)
             }
         }
-        idFilm?.let { viewModel.getFilmDetail(it) }
+        idFilm?.let { descriptionViewModel.getFilmDetail(it) }
     }
 
 
